@@ -227,14 +227,14 @@ echo -e "${GREEN}✅ LC_TIME=ur_PK.UTF-8 set successfully.${NC}"
 
 #Required Packages
 echo -e "${GREEN}📥 Installing required packages...${NC}"
-sudo pacman -Syu --needed "${REQUIRED_PACKAGES[@]}"
+sudo pacman -Sy --noconfirm --needed "${REQUIRED_PACKAGES[@]}"
 
 # Ask to install pacman packages
 echo -e "\n${YELLOW}📦 Do you want to install the following pacman packages?${NC}"
 echo "${PACMAN_PACKAGES[@]}"
 read -rp "Type 'yes/no' to continue: " ans1
 if [[ "$ans1" == "yes" ]]; then
-  sudo pacman -Syu --needed "${PACMAN_PACKAGES[@]}"
+  sudo pacman -Sy --needed "${PACMAN_PACKAGES[@]}"
 fi
 
 # Ask to install yay packages
