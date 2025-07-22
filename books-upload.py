@@ -7,7 +7,7 @@ from ebooklib import epub
 from PIL import Image
 from io import BytesIO
 
-WEBHOOK_URL = "https://discord.com/api/webhooks/1397107670833696879/sjrh6EDgov_LDuIuz4WIhEpPUfe-rC6R3f6ogC7jg-fw7EPMM7MWJk9dxm4Uzybv96C6"
+WEBHOOK_URL = "web-hook-url"
 BOOKS_FOLDER = "/home/ahmad/eBooks/Maths/"
 MAX_FILE_SIZE = 10 * 1024 * 1024
 SUPPORTED_EXTENSIONS = (".pdf", ".epub")
