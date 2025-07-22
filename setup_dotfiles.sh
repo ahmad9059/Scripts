@@ -221,8 +221,8 @@ fi
 
 # Set Only Time Locale to Pakistan (Urdu)
 echo -e "${GREEN}🕰️ Setting ur_PK.UTF-8 locale for time...${NC}"
-# Uncomment ur_PK.UTF-8 in locale.gen
-sudo sed -i '/^# *ur_PK.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
+# Uncomment ur_PK.UTF-8 in locale.gen (handles spacing and variants)
+sudo sed -i 's/^#\s*\(ur_PK.*UTF-8\)/\1/' /etc/locale.gen
 # Generate the locale
 sudo locale-gen
 # Set LC_TIME in /etc/locale.conf if not already set
@@ -230,7 +230,6 @@ if ! grep -q "^LC_TIME=ur_PK.UTF-8" /etc/locale.conf 2>/dev/null; then
     echo "LC_TIME=ur_PK.UTF-8" | sudo tee -a /etc/locale.conf > /dev/null
 fi
 echo -e "${GREEN}✅ LC_TIME=ur_PK.UTF-8 set successfully.${NC}"
-
 
 
 #Required Packages
