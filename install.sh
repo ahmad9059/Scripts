@@ -1,4 +1,6 @@
 #!/bin/bash
+
+
 set -e
 
 # Ask for sudo once, keep it alive
