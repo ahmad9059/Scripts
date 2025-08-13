@@ -4,7 +4,7 @@
 # 1️⃣ Clone the Hyprland-Dots repo
 # =========================
 echo "Cloning Hyprland-Dots repo into ~/Arch-Hyprland..."
-git clone https://github.com/JaKooLit/Hyprland-Dots.git ~/Arch-Hyprland/Hyprland-Dots
+git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots ~/Arch-Hyprland/Hyprland-Dots
 if [ $? -ne 0 ]; then
   echo "❌ Failed to clone repo. Exiting."
   exit 1
