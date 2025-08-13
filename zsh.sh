@@ -91,10 +91,11 @@ if command -v zsh >/dev/null; then
       sleep 1
     done
 
+    printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
     echo "Press any key to continue..."
     read -n1 -s key
     echo "You pressed: $key"
-    printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
+
   else
     echo "${NOTE} Your shell is already set to ${MAGENTA}zsh${RESET}."
   fi
