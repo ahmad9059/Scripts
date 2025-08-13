@@ -64,6 +64,7 @@ sed -i \
   "$TARGET_FILE"
 
 echo "✅ Substitutions completed successfully in $TARGET_FILE"
+cat "$TARGET_FILE"
 echo "Press any key to continue..."
 read -n1 -s key
 echo "You pressed: $key"
