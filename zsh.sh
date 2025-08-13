@@ -1,4 +1,5 @@
 #!/bin/bash
+# 💫 https://github.com/JaKooLit 💫 #
 # zsh and oh my zsh#
 
 zsh_pkg=(
@@ -11,6 +12,23 @@ zsh_pkg=(
 zsh_pkg2=(
   fzf
 )
+
+# Get the current username
+USER_NAME=$(whoami)
+
+# Temporary sudoers line
+SUDO_LINE="$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/chsh # TEMP-CHSH-ALLOW"
+
+# Function to clean up sudoers
+cleanup_sudoers() {
+    sudo sed -i "\|$SUDO_LINE|d" /etc/sudoers
+}
+trap cleanup_sudoers EXIT
+
+# Add temporary sudoers entry
+if ! sudo grep -qF "$SUDO_LINE" /etc/sudoers; then
+    echo "$SUDO_LINE" | sudo tee -a /etc/sudoers >/dev/null
+fi
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -78,27 +96,23 @@ if command -v zsh >/dev/null; then
   cp -r 'assets/.zshrc' ~/
   cp -r 'assets/.zprofile' ~/
 
+
   # Check if current shell is zsh
-  current_shell=$(basename "$SHELL")
-  if [ "$current_shell" != "zsh" ]; then
+current_shell=$(basename "$SHELL")
+if [ "$current_shell" != "zsh" ]; then
     printf "${NOTE} Attempting to change default shell to ${MAGENTA}zsh${RESET}...\n"
 
-    # Only try chsh if we have a TTY
-    if [ -t 0 ]; then
-        while ! chsh -s "$(command -v zsh)"; do
-            echo "${ERROR} Authentication failed. Please enter the correct password." 2>&1 | tee -a "$LOG"
-            sleep 1
-        done
+    # Use sudo chsh with NOPASSWD to work even in a pipe
+    if sudo chsh -s "$(command -v zsh)" "$USER"; then
         printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
     else
-        echo "${WARNING} Cannot change shell automatically because no interactive terminal is available."
-        echo "Please run manually: chsh -s $(command -v zsh)"
+        echo "${ERROR} Failed to change shell. Please run manually: chsh -s $(command -v zsh)"
     fi
-  else
+else
     echo "${NOTE} Your shell is already set to ${MAGENTA}zsh${RESET}."
-  fi
+fi
 
-  
+ 
 # Installing core zsh packages
 printf "\n%s - Installing ${SKY_BLUE}fzf${RESET} .... \n" "${NOTE}"
 for ZSH2 in "${zsh_pkg2[@]}"; do
