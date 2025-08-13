@@ -13,6 +13,25 @@ zsh_pkg2=(
   fzf
 )
 
+USER_NAME=$(whoami)
+# Get the current username
+USER_NAME=$(whoami)
+
+# Temporary sudoers line SUDO_LINE="$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/chsh # TEMP-CHSH-ALLOW"
+
+# Function to clean up sudoers on exit
+cleanup_sudoers() {
+  echo "Cleaning up temporary sudoers entry..."
+  sudo sed -i "\|$SUDO_LINE|d" /etc/sudoers
+}
+trap cleanup_sudoers EXIT
+
+# Add temporary sudoers entry if not already present
+if ! sudo grep -qF "$SUDO_LINE" /etc/sudoers; then
+  echo "Adding temporary sudoers entry for $USER_NAME..."
+  echo "$SUDO_LINE" | sudo tee -a /etc/sudoers >/dev/null
+fi
+
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -83,19 +102,12 @@ if command -v zsh >/dev/null; then
   if [ "$current_shell" != "zsh" ]; then
     printf "${NOTE} Changing default shell to ${MAGENTA}zsh${RESET}...\n"
 
-    USER_NAME=$(whoami)
-
     # Loop until sudo chsh succeeds
     while ! sudo chsh -s "$(command -v zsh)" "$USER_NAME"; do
       echo "${ERROR} Failed to change shell. Please ensure you have sudo permissions." 2>&1 | tee -a "$LOG"
       sleep 1
     done
-
     printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
-    echo "Press any key to continue..."
-    read -n1 -s key
-    echo "You pressed: $key"
-
   else
     echo "${NOTE} Your shell is already set to ${MAGENTA}zsh${RESET}."
   fi
