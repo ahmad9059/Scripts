@@ -23,25 +23,18 @@ wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
 #!/bin/bash
 
-# Paths
-INSTALL_SCRIPTS=~/Arch-Hyprland/install-scripts
-REPO_SCRIPT="$INSTALL_SCRIPTS/replace_reads.sh"
-DOTFILES_SCRIPT="$INSTALL_SCRIPTS/dotfiles-main.sh"
-
 # 1️⃣ Download replace_reads.sh
-wget -O "$REPO_SCRIPT" "https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh"
-chmod +x "$REPO_SCRIPT"
+wget -O ~/Arch-Hyprland/install-scripts/replace_reads.sh "https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh"
+chmod +x ~/Arch-Hyprland/install-scripts/replace_reads.sh
 echo "✅ replace_reads.sh downloaded and made executable."
 
-# 2️⃣ Insert line to run replace_reads.sh after chmod +x copy.sh
-# Detect lines containing 'chmod +x copy.sh' and append our script after each
-grep -n 'chmod +x copy.sh' "$DOTFILES_SCRIPT" | cut -d: -f1 | while read -r line_num; do
-  sed -i "$((line_num + 1))i $REPO_SCRIPT" "$DOTFILES_SCRIPT"
-  echo "✅ Added run command after line $line_num"
-done
+# 2️⃣ Insert a line to run replace_reads.sh after the first occurrence of 'chmod +x copy.sh'
+sed -i '/chmod +x copy.sh/{n;a ~/Arch-Hyprland/install-scripts/replace_reads.sh}' ~/Arch-Hyprland/install-scripts/dotfiles-main.sh
 
-echo "✅ All substitutions in dotfiles-main.sh completed."
+# 3️⃣ Insert a line to run replace_reads.sh after the second occurrence of 'chmod +x copy.sh'
+sed -i '0,/chmod +x copy.sh/{//{n;a ~/Arch-Hyprland/install-scripts/replace_reads.sh}}' ~/Arch-Hyprland/install-scripts/dotfiles-main.sh
 
+echo "✅ replace_reads.sh run commands added in dotfiles-main.sh"
 bash install.sh
 
 # Clone dotfiles repo into $HOME if missing
