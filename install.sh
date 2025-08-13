@@ -24,8 +24,4 @@ echo "Running dotfiles/install.sh with preset answers..."
 cd "$HOME/dotfiles"
 bash install.sh
 
-mkdir -p ~/.cache/swww && echo -e "Lanczos3\n/home/ahmad/Pictures/wallpapers/wallpaper-1.jpg" > ~/.cache/swww/eDP-1
-mkdir -p ~/.cache/swww && echo -e "Lanczos3\n/home/ahmad/Pictures/wallpapers/wallpaper-1.jpg" > ~/.cache/swww/Virtual-1
-
-
 echo "✅ All done!"
