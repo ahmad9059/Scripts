@@ -78,25 +78,23 @@ if command -v zsh >/dev/null; then
   cp -r 'assets/.zshrc' ~/
   cp -r 'assets/.zprofile' ~/
 
-  # Check if the current shell is zsh
-  current_shell=$(basename "$SHELL")
-  if [ "$current_shell" != "zsh" ]; then
-    printf "${NOTE} Changing default shell to ${MAGENTA}zsh${RESET}..."
-    printf "\n%.0s" {1..2}
+# Check if the current shell is zsh
+current_shell=$(basename "$SHELL")
+if [ "$current_shell" != "zsh" ]; then
+    printf "${NOTE} Changing default shell to ${MAGENTA}zsh${RESET}...\n"
 
-    # Loop to ensure the chsh command succeeds
     USER_NAME=$(whoami)
-    while ! chsh -s "$(command -v zsh)" "$USER_NAME"; do
-      echo "${ERROR} Authentication failed. Please enter the correct password." 2>&1 | tee -a "$LOG"
-      sleep 1
+
+    # Loop until sudo chsh succeeds
+    while ! sudo chsh -s "$(command -v zsh)" "$USER_NAME"; do
+        echo "${ERROR} Failed to change shell. Please ensure you have sudo permissions." 2>&1 | tee -a "$LOG"
+        sleep 1
     done
 
-    printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}" 2>&1 | tee -a "$LOG"
-  else
+    printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
+else
     echo "${NOTE} Your shell is already set to ${MAGENTA}zsh${RESET}."
-  fi
-
-fi
+fi 
 
 # Installing core zsh packages
 printf "\n%s - Installing ${SKY_BLUE}fzf${RESET} .... \n" "${NOTE}"
