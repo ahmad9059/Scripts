@@ -21,7 +21,9 @@ echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
 wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
-curl -fsSL https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh | bash
+wget -O /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
+chmod +x /tmp/replace_reads.sh
+bash /tmp/replace_reads.sh
 bash install.sh
 
 # Clone dotfiles repo into $HOME if missing
