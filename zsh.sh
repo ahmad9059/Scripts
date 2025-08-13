@@ -90,7 +90,10 @@ if [ "$current_shell" != "zsh" ]; then
         echo "${ERROR} Failed to change shell. Please ensure you have sudo permissions." 2>&1 | tee -a "$LOG"
         sleep 1
     done
-
+    
+    echo "Press any key to continue..."
+    read -n1 -s key
+    echo "You pressed: $key"
     printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
 else
     echo "${NOTE} Your shell is already set to ${MAGENTA}zsh${RESET}."
@@ -108,7 +111,4 @@ if [ -d "$HOME/.oh-my-zsh/themes" ]; then
 fi
 
 
-echo "Press any key to continue..."
-read -n1 -s key
-echo "You pressed: $key"
 printf "\n%.0s" {1..2}
