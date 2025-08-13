@@ -27,10 +27,10 @@ chmod +x /home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh
 echo "✅ replace_reads.sh downloaded and made executable."
 
 # Insert command to run replace_reads.sh after line 27
-sed -i '27a /home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh' /home/ahmad/Arch-Hyprland/install-scripts/dotfiles-main.sh
+sed -i '27a ./home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh' /home/ahmad/Arch-Hyprland/install-scripts/dotfiles-main.sh
 
 # Insert command to run replace_reads.sh after line 32
-sed -i '32a /home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh' /home/ahmad/Arch-Hyprland/install-scripts/dotfiles-main.sh
+sed -i '32a ./home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh' /home/ahmad/Arch-Hyprland/install-scripts/dotfiles-main.sh
 
 echo "✅ replace_reads.sh run commands added in dotfiles-main.sh"
 bash install.sh
