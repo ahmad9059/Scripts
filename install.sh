@@ -14,7 +14,7 @@ if [ ! -d "$HOME/Arch-Hyprland" ]; then
 fi
 echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
-cat "$SCRIPT_DIR/preset_config.sh" | bash install.sh
+bash install.sh
 
 # Clone dotfiles repo into $HOME if missing
 if [ ! -d "$HOME/dotfiles" ]; then
@@ -22,7 +22,7 @@ if [ ! -d "$HOME/dotfiles" ]; then
 fi
 echo "Running dotfiles/install.sh with preset answers..."
 cd "$HOME/dotfiles"
-cat "$SCRIPT_DIR/preset_dotfile.sh" | bash install.sh
+bash install.sh
 
 mkdir -p ~/.cache/swww && echo -e "Lanczos3\n/home/ahmad/Pictures/wallpapers/wallpaper-1.jpg" > ~/.cache/swww/eDP-1
 mkdir -p ~/.cache/swww && echo -e "Lanczos3\n/home/ahmad/Pictures/wallpapers/wallpaper-1.jpg" > ~/.cache/swww/Virtual-1
