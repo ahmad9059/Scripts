@@ -21,7 +21,7 @@ echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
 wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
-sed -i '/^[[:space:]]*git stash && git pull/d' Arch-Hyprland/install-scripts/dotfiles-main.sh
+sed -i '/^[[:space:]]*git stash && git pull/d' ~/Arch-Hyprland/install-scripts/dotfiles-main.sh
 # --------------- #
 # =========================
 # 1️⃣ Clone the Hyprland-Dots repo
