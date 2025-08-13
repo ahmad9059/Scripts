@@ -21,8 +21,6 @@ echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
 wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
-#!/bin/bash
-
 # 1️⃣ Download replace_reads.sh
 wget -O ~/Arch-Hyprland/install-scripts/replace_reads.sh "https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh"
 chmod +x ~/Arch-Hyprland/install-scripts/replace_reads.sh
