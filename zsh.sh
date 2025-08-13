@@ -13,6 +13,7 @@ zsh_pkg2=(
   fzf
 )
 
+# Custome Files
 # Get the current username
 USER_NAME=$(whoami)
 
