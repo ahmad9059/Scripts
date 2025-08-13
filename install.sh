@@ -25,24 +25,14 @@ sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
 # =========================
 # 1️⃣ Clone the Hyprland-Dots repo
 # =========================
-REPO_DIR="$HOME/Arch-Hyprland/Hyprland-Dots"
-
-if [ -d "$REPO_DIR/.git" ]; then
-  echo "📂 Repo already exists at $REPO_DIR, updating..."
-  cd "$REPO_DIR" || exit 1
-  git pull --ff-only || {
-    echo "❌ Failed to update repo."
-    exit 1
-  }
-else
-  echo "⬇️ Cloning Hyprland-Dots repo into $REPO_DIR..."
-  git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots "$REPO_DIR" || {
-    echo "❌ Failed to clone repo. Exiting."
-    exit 1
-  }
+echo "Cloning Hyprland-Dots repo into ~/Arch-Hyprland..."
+git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots ~/Arch-Hyprland/Hyprland-Dots
+if [ $? -ne 0 ]; then
+  echo "❌ Failed to clone repo. Exiting."
+  exit 1
 fi
+echo "✅ Repo cloned successfully."
 
-echo "✅ Repo ready."
 # =========================
 # 2️⃣ Variables to replace in copy.sh
 # =========================
@@ -74,7 +64,7 @@ sed -i \
   "$TARGET_FILE"
 
 echo "✅ Substitutions completed successfully in $TARGET_FILE"
-cat "$TARGET_FILE"
+nvim "$TARGET_FILE"
 echo "Press any key to continue..."
 read -n1 -s key
 echo "You pressed: $key"
