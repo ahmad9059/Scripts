@@ -21,18 +21,7 @@ echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
 wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
-# Download replace_reads.sh
-wget -O /home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh "https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh"
-chmod +x /home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh
-echo "✅ replace_reads.sh downloaded and made executable."
 
-# Insert command to run replace_reads.sh after line 27
-sed -i '27a ./home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh' /home/ahmad/Arch-Hyprland/install-scripts/dotfiles-main.sh
-
-# Insert command to run replace_reads.sh after line 32
-sed -i '32a ./home/ahmad/Arch-Hyprland/install-scripts/replace_reads.sh' /home/ahmad/Arch-Hyprland/install-scripts/dotfiles-main.sh
-
-echo "✅ replace_reads.sh run commands added in dotfiles-main.sh"
 bash install.sh
 
 # Clone dotfiles repo into $HOME if missing

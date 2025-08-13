@@ -1,7 +1,18 @@
 #!/bin/bash
 
 # =========================
-# Variables to replace
+# 1️⃣ Clone the Hyprland-Dots repo
+# =========================
+echo "Cloning Hyprland-Dots repo into ~/Arch-Hyprland..."
+git clone https://github.com/JaKooLit/Hyprland-Dots.git ~/Arch-Hyprland/Hyprland-Dots
+if [ $? -ne 0 ]; then
+  echo "❌ Failed to clone repo. Exiting."
+  exit 1
+fi
+echo "✅ Repo cloned successfully."
+
+# =========================
+# 2️⃣ Variables to replace in copy.sh
 # =========================
 TARGET_FILE=~/Arch-Hyprland/Hyprland-Dots/copy.sh
 
@@ -11,10 +22,10 @@ res_choice=1
 answer="y"
 border_choice="y"
 SDDM_WALL="y"
-WALL="n"
+WALL="y"
 
 # =========================
-# Perform substitutions
+# 3️⃣ Perform substitutions
 # =========================
 sed -i \
   -e "s/^[[:space:]]*read keyboard_layout$/keyboard_layout=\"$keyboard_layout\"/" \
@@ -26,4 +37,9 @@ sed -i \
   -e "s/^[[:space:]]*read WALL$/WALL=\"$WALL\"/" \
   "$TARGET_FILE"
 
-echo "✅ Substitutions completed in $TARGET_FILE"
+if [ $? -ne 0 ]; then
+  echo "❌ Failed to perform substitutions in $TARGET_FILE"
+  exit 1
+fi
+
+echo "✅ Substitutions completed successfully in $TARGET_FILE"
