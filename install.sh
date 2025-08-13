@@ -16,7 +16,7 @@ if [ ! -d "$HOME/Arch-Hyprland" ]; then
 fi
 echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
-wget wget -qO- ""
+# wget wget -qO- ""
 bash install.sh
 
 # Clone dotfiles repo into $HOME if missing
