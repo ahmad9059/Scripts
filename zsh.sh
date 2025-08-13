@@ -107,4 +107,8 @@ if [ -d "$HOME/.oh-my-zsh/themes" ]; then
   cp -r assets/add_zsh_theme/* ~/.oh-my-zsh/themes >>"$LOG" 2>&1
 fi
 
+
+echo "Press any key to continue..."
+read -n1 -s key
+echo "You pressed: $key"
 printf "\n%.0s" {1..2}
