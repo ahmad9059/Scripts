@@ -78,26 +78,27 @@ if command -v zsh >/dev/null; then
   cp -r 'assets/.zshrc' ~/
   cp -r 'assets/.zprofile' ~/
 
-# Check if the current shell is zsh
-current_shell=$(basename "$SHELL")
-if [ "$current_shell" != "zsh" ]; then
+  # Check if the current shell is zsh
+  current_shell=$(basename "$SHELL")
+  if [ "$current_shell" != "zsh" ]; then
     printf "${NOTE} Changing default shell to ${MAGENTA}zsh${RESET}...\n"
 
     USER_NAME=$(whoami)
 
     # Loop until sudo chsh succeeds
     while ! sudo chsh -s "$(command -v zsh)" "$USER_NAME"; do
-        echo "${ERROR} Failed to change shell. Please ensure you have sudo permissions." 2>&1 | tee -a "$LOG"
-        sleep 1
+      echo "${ERROR} Failed to change shell. Please ensure you have sudo permissions." 2>&1 | tee -a "$LOG"
+      sleep 1
     done
-    
+
     echo "Press any key to continue..."
     read -n1 -s key
     echo "You pressed: $key"
     printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}\n" 2>&1 | tee -a "$LOG"
-else
+  else
     echo "${NOTE} Your shell is already set to ${MAGENTA}zsh${RESET}."
-fi 
+  fi
+fi
 
 # Installing core zsh packages
 printf "\n%s - Installing ${SKY_BLUE}fzf${RESET} .... \n" "${NOTE}"
@@ -109,6 +110,5 @@ done
 if [ -d "$HOME/.oh-my-zsh/themes" ]; then
   cp -r assets/add_zsh_theme/* ~/.oh-my-zsh/themes >>"$LOG" 2>&1
 fi
-
 
 printf "\n%.0s" {1..2}
