@@ -3,7 +3,17 @@ set -e
 
 # Ask for sudo once, keep it alive
 sudo -v
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Keep sudo alive for 2 hours (refresh every 60 seconds)
+# This loop will end automatically when the script finishes
+(
+    end=$((SECONDS + 7200)) # 7200 seconds = 2 hours
+    while [ $SECONDS -lt $end ]; do
+        sudo -n true
+        sleep 60
+    done
+) 2>/dev/null &
+
 
 # Directory where this script (and presets) live
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
