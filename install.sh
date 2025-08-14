@@ -13,8 +13,16 @@ done) 2>/dev/null &
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Clone Arch-Hyprland repo into $HOME if missing
-if [ ! -d "$HOME/Arch-Hyprland" ]; then
-  git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"
+if [ -d "$HOME/Arch-Hyprland" ]; then
+  echo "📂 Folder 'Arch-Hyprland' already exists in ~, using it..."
+else
+  echo "⬇️ Cloning Arch-Hyprland repo into ~..."
+  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
+    echo "✅ Repo cloned successfully."
+  else
+    echo "❌ Failed to clone Arch-Hyprland repo. Exiting."
+    exit 1
+  fi
 fi
 echo "Running Arch-Hyprland/install.sh with preset answers..."
 cd "$HOME/Arch-Hyprland"
@@ -28,8 +36,17 @@ bash /tmp/replace_reads.sh
 bash install.sh
 
 # Clone dotfiles repo into $HOME if missing
-if [ ! -d "$HOME/dotfiles" ]; then
-  git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles"
+# Clone dotfiles repo into $HOME if missing
+if [ -d "$HOME/dotfiles" ]; then
+  echo "📂 Folder 'dotfiles' already exists in ~, using it..."
+else
+  echo "⬇️ Cloning dotfiles repo into ~..."
+  if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles"; then
+    echo "✅ Repo cloned successfully."
+  else
+    echo "❌ Failed to clone dotfiles repo. Exiting."
+    exit 1
+  fi
 fi
 echo "Running dotfiles/install.sh with preset answers..."
 cd "$HOME/dotfiles"
