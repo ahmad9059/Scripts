@@ -24,7 +24,7 @@ if [ -d "$HOME/Arch-Hyprland/Hyprland-Dots" ]; then
   echo "${NOTE} Folder 'Hyprland-Dots' already exists in ~/Arch-Hyprland, using it...${RESET}"
 else
   echo "${NOTE} Cloning Hyprland-Dots repo into ~/Arch-Hyprland...${RESET}"
-  if git clone --depth=1 https://github.com/ahmad9059/Arch-Hyprland.git "$HOME/Arch-Hyprland/Hyprland-Dots"; then
+  if git clone --depth=1 https://github.com/ahmad9059/Hyprland-Dots.git "$HOME/Arch-Hyprland/Hyprland-Dots"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone repo. Exiting.${RESET}"
