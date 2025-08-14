@@ -39,9 +39,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Clone Arch-Hyprland repo
 # ===========================
 if [ -d "$HOME/Arch-Hyprland" ]; then
-  echo "${NOTE} Folder 'Arch-Hyprland' already exists in ~, using it...${RESET}"
+  echo "${NOTE} Folder 'Arch-Hyprland' already exists in HOME, using it...${RESET}"
 else
-  echo "${NOTE} Cloning Arch-Hyprland repo into ~...${RESET}"
+  echo "${NOTE} Cloning Arch-Hyprland repo into HOME...${RESET}"
   if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
@@ -56,10 +56,10 @@ fi
 echo "${NOTE} Running Arch-Hyprland/install.sh with preset answers...${RESET}"
 cd "$HOME/Arch-Hyprland"
 
-wget -qO- ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
+wget -qO ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
 
-wget -qO- /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
+wget -qO /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
 chmod +x /tmp/replace_reads.sh
 bash /tmp/replace_reads.sh
 chmod +x install.sh
