@@ -10,11 +10,12 @@ WARN="$(tput setaf 3)[WARN]$(tput sgr0)"
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
 NOTE="$(tput setaf 6)[NOTE]$(tput sgr0)"
 ACTION="$(tput setaf 5)[ACTION]$(tput sgr0)"
+RESET="$(tput sgr0)"
 
 # ===========================
 # Ask for sudo once, keep it alive
 # ===========================
-echo "$NOTE Asking for sudo password..."
+echo "${NOTE} Asking for sudo password...${RESET}"
 sudo -v
 
 keep_sudo_alive() {
@@ -38,13 +39,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Clone Arch-Hyprland repo
 # ===========================
 if [ -d "$HOME/Arch-Hyprland" ]; then
-  echo "$NOTE Folder 'Arch-Hyprland' already exists in ~, using it..."
+  echo "${NOTE} Folder 'Arch-Hyprland' already exists in ~, using it...${RESET}"
 else
-  echo "$NOTE Cloning Arch-Hyprland repo into ~..."
+  echo "${NOTE} Cloning Arch-Hyprland repo into ~...${RESET}"
   if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
-    echo "$OK Repo cloned successfully."
+    echo "${OK} Repo cloned successfully.${RESET}"
   else
-    echo "$ERROR Failed to clone Arch-Hyprland repo. Exiting."
+    echo "${ERROR} Failed to clone Arch-Hyprland repo. Exiting.${RESET}"
     exit 1
   fi
 fi
@@ -52,29 +53,29 @@ fi
 # ===========================
 # Run Arch-Hyprland installer
 # ===========================
-echo "$NOTE Running Arch-Hyprland/install.sh with preset answers..."
+echo "${NOTE} Running Arch-Hyprland/install.sh with preset answers...${RESET}"
 cd "$HOME/Arch-Hyprland"
 
-wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
+wget -qO- ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
-sed -i '/^[[:space:]]*git stash && git pull/d' ~/Arch-Hyprland/install-scripts/dotfiles-main.sh
 
-wget -O /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
+wget -qO- /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
 chmod +x /tmp/replace_reads.sh
 bash /tmp/replace_reads.sh
+chmod +x install.sh
 bash install.sh
 
 # ===========================
 # Clone dotfiles repo
 # ===========================
 if [ -d "$HOME/dotfiles" ]; then
-  echo "$NOTE Folder 'dotfiles' already exists in ~, using it..."
+  echo "${NOTE} Folder 'dotfiles' already exists in ~, using it...${RESET}"
 else
-  echo "$NOTE Cloning dotfiles repo into ~..."
+  echo "${NOTE} Cloning dotfiles repo into ~...${RESET}"
   if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles"; then
-    echo "$OK Repo cloned successfully."
+    echo "${OK} Repo cloned successfully.${RESET}"
   else
-    echo "$ERROR Failed to clone dotfiles repo. Exiting."
+    echo "${ERROR} Failed to clone dotfiles repo. Exiting.${RESET}"
     exit 1
   fi
 fi
@@ -82,9 +83,10 @@ fi
 # ===========================
 # Run dotfiles installer
 # ===========================
-echo "$NOTE Running dotfiles/install.sh with preset answers..."
+echo "${NOTE} Running dotfiles/install.sh with preset answers...${RESET}"
 cd "$HOME/dotfiles"
-bash install.sh
+chmod +x dotfile_installer
+bash dotfile_installer.sh
 
 # ===========================
 # Check for Reboot
@@ -94,5 +96,5 @@ if [[ "$REBOOT_CHOICE" =~ ^[Yy]$ ]]; then
   echo "$OK Rebooting..."
   sudo reboot
 else
-  echo "$OK You chose NOT to reboot. Please reboot later."
+  echo "${OK} You chose NOT to reboot. Please reboot later.${RESET}"
 fi

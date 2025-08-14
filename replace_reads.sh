@@ -10,18 +10,19 @@ WARN="$(tput setaf 3)[WARN]$(tput sgr0)"
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
 NOTE="$(tput setaf 6)[NOTE]$(tput sgr0)"
 ACTION="$(tput setaf 5)[ACTION]$(tput sgr0)"
+RESET="$(tput sgr0)"
 
 # ===========================
 # 1️⃣ Clone the Hyprland-Dots repo
 # ===========================
 if [ -d "$HOME/Arch-Hyprland/Hyprland-Dots" ]; then
-  echo "$NOTE Folder 'Hyprland-Dots' already exists in ~/Arch-Hyprland, using it..."
+  echo "${NOTE} Folder 'Hyprland-Dots' already exists in ~/Arch-Hyprland, using it...${RESET}"
 else
-  echo "$NOTE Cloning Hyprland-Dots repo into ~/Arch-Hyprland..."
+  echo "${NOTE} Cloning Hyprland-Dots repo into ~/Arch-Hyprland...${RESET}"
   if git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots "$HOME/Arch-Hyprland/Hyprland-Dots"; then
-    echo "$OK Repo cloned successfully."
+    echo "${OK} Repo cloned successfully.${RESET}"
   else
-    echo "$ERROR Failed to clone repo. Exiting."
+    echo "${ERROR} Failed to clone repo. Exiting.${RESET}"
     exit 1
   fi
 fi
@@ -32,7 +33,7 @@ fi
 TARGET_FILE="$HOME/Arch-Hyprland/Hyprland-Dots/copy.sh"
 
 if [ ! -f "$TARGET_FILE" ]; then
-  echo "$ERROR $TARGET_FILE not found!"
+  echo "${ERROR} $TARGET_FILE not found!${RESET}"
   exit 1
 fi
 
@@ -48,7 +49,8 @@ WALL="n"
 # ===========================
 # Apply substitutions
 # ===========================
-echo "$NOTE Applying substitutions to $TARGET_FILE..."
+echo "${NOTE} Applying substitutions to $TARGET_FILE...${RESET}"
+sed -i '/^[[:space:]]*git stash && git pull/d' ~/Arch-Hyprland/install-scripts/dotfiles-main.sh
 sed -i \
   -e "s/^[[:space:]]*read keyboard_layout.*/keyboard_layout=\"$keyboard_layout\"/" \
   -e "s/^[[:space:]]*read EDITOR_CHOICE.*/EDITOR_CHOICE=\"$EDITOR_CHOICE\"/" \
@@ -59,4 +61,4 @@ sed -i \
   -e "s/^[[:space:]]*read WALL.*/WALL=\"$WALL\"/" \
   "$TARGET_FILE"
 
-echo "$OK Substitutions completed successfully in $TARGET_FILE"
+echo "${OK} Substitutions completed successfully in $TARGET_FILE ${RESET}"
