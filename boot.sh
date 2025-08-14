@@ -13,9 +13,10 @@ ACTION="$(tput setaf 5)[ACTION]$(tput sgr0)"
 RESET="$(tput sgr0)"
 
 # ===========================
-# Run Arch-Hyprland installer
+# Log Details
 # ===========================
-LOG_FILE="$HOME/boot_file.log"
+mkdir -p "$HOME/installer_log"
+LOG_FILE="$HOME/installer_log/boot_file.log"
 
 # ===========================
 # Ask for sudo once, keep it alive
@@ -47,7 +48,7 @@ if [ -d "$HOME/Arch-Hyprland" ]; then
   echo "${NOTE} Folder 'Arch-Hyprland' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning Arch-Hyprland repo into HOME...${RESET}"
-  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland" >>"$LOG_FILE" 2>&1; then
+  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland" 2>&1 | tee -a "$LOG_FILE"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone Arch-Hyprland repo. Exiting.${RESET}"
@@ -74,13 +75,13 @@ echo "${OK} Arch-Hyprland script Installed!${RESET}"
 # dotfile banner Banner
 # ===========================
 clear
-echo "\n\n\n"
+echo -e "\n\n\n"
 echo -e "\033[1;31m     _       _    __ _ _             ___           _        _ _           \033[0m"
 echo -e "\033[1;32m  __| | ___ | |_ / _(_) | ___  ___  |_ _|_ __  ___| |_ __ _| | | ___ _ __ \033[0m"
 echo -e "\033[1;33m / _\` |/ _ \| __| |_| | |/ _ \/ __|  | || '_ \/ __| __/ _\` | | |/ _ \ '__|\033[0m"
 echo -e "\033[1;34m| (_| | (_) | |_|  _| | |  __/\__ \  | || | | \__ \ || (_| | | |  __/ |   \033[0m"
 echo -e "\033[1;35m \__,_|\___/ \__|_| |_|_|\___||___/ |___|_| |_|___/\__\__,_|_|_|\___|_|   \033[0m"
-echo "\n\n\n"
+echo -e "\n\n\n"
 
 # ===========================
 # Clone dotfiles repo
@@ -89,7 +90,7 @@ if [ -d "$HOME/dotfiles" ]; then
   echo "${NOTE} Folder 'dotfiles' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning dotfiles repo into ~...${RESET}"
-  if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles" >>"$LOG_FILE" 2>&1; then
+  if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles" 2>&1 | tee -a "$LOG_FILE"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone dotfiles repo. Exiting.${RESET}"

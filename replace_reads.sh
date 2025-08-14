@@ -13,13 +13,18 @@ ACTION="$(tput setaf 5)[ACTION]$(tput sgr0)"
 RESET="$(tput sgr0)"
 
 # ===========================
+# Log Details
+# ===========================
+LOG_FILE="$HOME/installer_log/replace_reads.log"
+
+# ===========================
 # 1️⃣ Clone the Hyprland-Dots repo
 # ===========================
 if [ -d "$HOME/Arch-Hyprland/Hyprland-Dots" ]; then
   echo "${NOTE} Folder 'Hyprland-Dots' already exists in ~/Arch-Hyprland, using it...${RESET}"
 else
   echo "${NOTE} Cloning Hyprland-Dots repo into ~/Arch-Hyprland...${RESET}"
-  if git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots "$HOME/Arch-Hyprland/Hyprland-Dots"; then
+  if git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots "$HOME/Arch-Hyprland/Hyprland-Dots" >>"$LOG_FILE" 2>&1; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone repo. Exiting.${RESET}"
