@@ -50,7 +50,7 @@ if [ -d "$HOME/Arch-Hyprland" ]; then
   echo "${NOTE} Folder 'Arch-Hyprland' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning Arch-Hyprland repo into HOME...${RESET}"
-  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland" 2>&1 | tee -a "$LOG_FILE"; then
+  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone Arch-Hyprland repo. Exiting.${RESET}"
@@ -95,7 +95,7 @@ if [ -d "$HOME/dotfiles" ]; then
   echo "${NOTE} Folder 'dotfiles' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning dotfiles repo into ~...${RESET}"
-  if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles" 2>&1 | tee -a "$LOG_FILE"; then
+  if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone dotfiles repo. Exiting.${RESET}"
