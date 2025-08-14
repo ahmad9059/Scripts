@@ -15,7 +15,7 @@ CYAN="$(tput setaf 6)"
 RED="$(tput setaf 1)"
 GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 4)"
-RESET="$(tput sgr0)"
+MAGENTA="$(tput setaf 5)"
 
 # ===========================
 # Log Details
@@ -82,9 +82,9 @@ echo "${OK} Arch-Hyprland script Installed!${RESET}"
 clear
 
 echo -e "\n"
-echo -e "${RED}┌┬┐┌─┐┌┬┐┌─┐┬┬  ┌─┐┌─┐┌─┐  ┬┌┐┌┌─┐┌┬┐┌─┐┬  ┬  ┌─┐┬─┐${RESET}"
-echo -e "${BLUE} │││ │ │ ├┤ ││  ├┤ └─┐└─┐  ││││└─┐ │ ├─┤│  │  ├┤ ├┬┘${RESET}"
-echo -e "${GREEN}─┴┘└─┘ ┴ └  ┴┴─┘└─┘└─┘└─┘  ┴┘└┘└─┘ ┴ ┴ ┴┴─┘┴─┘└─┘┴└─${RESET}"
+echo -e "${MAGENTA}┌┬┐┌─┐┌┬┐┌─┐┬┬  ┌─┐┌─┐┌─┐  ┬┌┐┌┌─┐┌┬┐┌─┐┬  ┬  ┌─┐┬─┐${RESET}"
+echo -e "${MAGENTA} │││ │ │ ├┤ ││  ├┤ └─┐└─┐  ││││└─┐ │ ├─┤│  │  ├┤ ├┬┘${RESET}"
+echo -e "${MAGENTA}─┴┘└─┘ ┴ └  ┴┴─┘└─┘└─┘└─┘  ┴┘└┘└─┘ ┴ ┴ ┴┴─┘┴─┘└─┘┴└─${RESET}"
 echo -e "${CYAN}*-------------------@ahmad9059-----------------------*${RESET}"
 echo -e "\n"
 
