@@ -3,14 +3,17 @@
 # =========================
 # 1️⃣ Clone the Hyprland-Dots repo
 # =========================
-echo "Cloning Hyprland-Dots repo into ~/Arch-Hyprland..."
-git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots ~/Arch-Hyprland/Hyprland-Dots
-if [ $? -ne 0 ]; then
-  echo "❌ Failed to clone repo. Exiting."
-  exit 1
+if [ -d "$HOME/Arch-Hyprland/Hyprland-Dots" ]; then
+  echo "📂 Folder 'Hyprland-Dots' already exists in ~/Arch-Hyprland, using it..."
+else
+  echo "⬇️ Cloning Hyprland-Dots repo into ~/Arch-Hyprland..."
+  if git clone --depth=1 https://github.com/JaKooLit/Hyprland-Dots "$HOME/Arch-Hyprland/Hyprland-Dots"; then
+    echo "✅ Repo cloned successfully."
+  else
+    echo "❌ Failed to clone repo. Exiting."
+    exit 1
+  fi
 fi
-echo "✅ Repo cloned successfully."
-
 # =========================
 # 2️⃣ Variables to replace in copy.sh
 # =========================
