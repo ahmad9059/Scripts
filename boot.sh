@@ -53,7 +53,7 @@ if [ -d "$HOME/Arch-Hyprland" ]; then
   echo "${NOTE} Folder 'Arch-Hyprland' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning Arch-Hyprland repo into HOME...${RESET}"
-  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
+  if git clone --depth=1 https://github.com/ahmad9059/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone Arch-Hyprland repo. Exiting.${RESET}"
