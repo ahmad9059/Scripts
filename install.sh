@@ -87,19 +87,8 @@ cd "$HOME/dotfiles"
 bash install.sh
 
 # ===========================
-# Final status
+# Check for Reboot
 # ===========================
-echo
-echo "$OK All done!"
-echo "$NOTE Final Check if all essential packages were installed"
-echo "$OK GREAT! All essential packages have been successfully installed."
-echo
-echo "$OK 👌 Hyprland is installed. However, some essential packages may not be installed. Please check logs above."
-echo "$ACTION Ignore this if it states 'All essential packages are installed'."
-echo
-echo "$NOTE You can start Hyprland by typing 'Hyprland' (if SDDM is not installed)."
-echo "$NOTE However, it is highly recommended to reboot your system."
-read -rp "$ACTION Would you like to reboot now? (y/n): " REBOOT_CHOICE
 
 if [[ "$REBOOT_CHOICE" =~ ^[Yy]$ ]]; then
   echo "$OK Rebooting..."
