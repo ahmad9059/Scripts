@@ -84,7 +84,7 @@ echo -e "\033[1;35m \__,_|\___/ \__|_| |_|_|\___||___/ |___|_| |_|___/\__\__,_|_
 # Clone dotfiles repo
 # ===========================
 if [ -d "$HOME/dotfiles" ]; then
-  echo "${NOTE} Folder 'dotfiles' already exists in ~, using it...${RESET}"
+  echo "${NOTE} Folder 'dotfiles' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning dotfiles repo into ~...${RESET}"
   if git clone --depth=1 https://github.com/ahmad9059/dotfiles.git "$HOME/dotfiles" >>"$LOG_FILE" 2>&1; then
