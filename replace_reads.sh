@@ -21,8 +21,6 @@ if [ ! -f "$TARGET_FILE" ]; then
   exit 1
 fi
 
-chmod +w "$TARGET_FILE"
-
 keyboard_layout="y"
 EDITOR_CHOICE="y"
 res_choice=1
@@ -42,9 +40,3 @@ sed -i \
   "$TARGET_FILE"
 
 echo "✅ Substitutions completed successfully in $TARGET_FILE"
-nvim "$TARGET_FILE"
-echo "Press any key to continue..."
-read -n1 -s key
-echo "You pressed: $key"
-
-# ------------------- #
