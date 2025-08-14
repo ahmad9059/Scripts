@@ -112,12 +112,14 @@ chmod +x dotfile_installer.sh
 bash dotfile_installer.sh
 
 # ===========================
-# Check for Reboot
+# Ask for Reboot
 # ===========================
+
+read -p "Do you want to reboot now? [y/N]: " REBOOT_CHOICE
 
 if [[ "$REBOOT_CHOICE" =~ ^[Yy]$ ]]; then
   echo "$OK Rebooting..."
   sudo reboot
 else
-  echo "${OK} You chose NOT to reboot. Please reboot later.${RESET}"
+  echo "$OK You chose NOT to reboot. Please reboot later."
 fi
