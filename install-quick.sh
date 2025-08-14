@@ -69,11 +69,9 @@ cd "$HOME/Arch-Hyprland"
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
 sed -i '345i \
 wget -q -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh\n\
-sed -i '\''/^[[:space:]]*read HYP$/c\HYP="n"'\'' ~/Arch-Hyprland/install.sh\n\
 wget -q -O /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh\n\
 chmod +x /tmp/replace_reads.sh\n\
-bash /tmp/replace_reads.sh
-' ~/Arch-Hyprland/install.sh
+bash /tmp/replace_reads.sh ' ~/Arch-Hyprland/install.sh
 chmod +x install.sh
 bash install.sh
 echo "${OK} Arch-Hyprland script Installed!${RESET}"
