@@ -3,12 +3,11 @@
 set -e
 
 # Ask for sudo once, keep it alive
-sudo -v
-while true; do
+(while true; do
   sudo -n true
   sleep 60
   kill -0 "$$" || exit
-done 2>/dev/null &
+done) 2>/dev/null &
 
 # Directory where this script (and presets) live
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
