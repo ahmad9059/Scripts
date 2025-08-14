@@ -3,11 +3,23 @@
 set -e
 
 # Ask for sudo once, keep it alive
-(while true; do
-  sudo -n true
-  sleep 60
-  kill -0 "$$" || exit
-done) 2>/dev/null &
+# Ask for sudo password upfront
+sudo -v
+
+# Function to keep sudo alive until this script exits
+keep_sudo_alive() {
+  while true; do
+    sudo -n true
+    sleep 30
+  done
+}
+
+# Start keep-alive in background
+keep_sudo_alive &
+SUDO_KEEP_ALIVE_PID=$!
+
+# Ensure the keep-alive process stops on exit or Ctrl+C
+trap 'kill $SUDO_KEEP_ALIVE_PID' EXIT
 
 # Directory where this script (and presets) live
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
