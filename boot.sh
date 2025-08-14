@@ -13,6 +13,11 @@ ACTION="$(tput setaf 5)[ACTION]$(tput sgr0)"
 RESET="$(tput sgr0)"
 
 # ===========================
+# Run Arch-Hyprland installer
+# ===========================
+LOG_FILE="$HOME/boot_file.log"
+
+# ===========================
 # Ask for sudo once, keep it alive
 # ===========================
 echo "${NOTE} Asking for sudo password...${RESET}"
@@ -42,7 +47,7 @@ if [ -d "$HOME/Arch-Hyprland" ]; then
   echo "${NOTE} Folder 'Arch-Hyprland' already exists in HOME, using it...${RESET}"
 else
   echo "${NOTE} Cloning Arch-Hyprland repo into HOME...${RESET}"
-  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland"; then
+  if git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git "$HOME/Arch-Hyprland" >>"$LOG_FILE" 2>&1; then
     echo "${OK} Repo cloned successfully.${RESET}"
   else
     echo "${ERROR} Failed to clone Arch-Hyprland repo. Exiting.${RESET}"
@@ -58,7 +63,6 @@ cd "$HOME/Arch-Hyprland"
 
 wget -q -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
-
 wget -q -O /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
 chmod +x /tmp/replace_reads.sh
 bash /tmp/replace_reads.sh
