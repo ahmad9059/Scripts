@@ -21,7 +21,10 @@ cd "$HOME/Arch-Hyprland"
 wget -O ~/Arch-Hyprland/install-scripts/zsh.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/zsh.sh
 sed -i '/^[[:space:]]*read HYP$/c\HYP="n"' ~/Arch-Hyprland/install.sh
 sed -i '/^[[:space:]]*git stash && git pull/d' ~/Arch-Hyprland/install-scripts/dotfiles-main.sh
-curl -fsSL https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh | bash
+# Using wget
+wget -O /tmp/replace_reads.sh https://raw.githubusercontent.com/ahmad9059/Scripts/main/replace_reads.sh
+chmod +x /tmp/replace_reads.sh
+bash /tmp/replace_reads.sh
 bash install.sh
 
 # Clone dotfiles repo into $HOME if missing
