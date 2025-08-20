@@ -105,7 +105,6 @@ echo "${NOTE} Running dotfiles/install.sh with preset answers...${RESET}"
 cd "$HOME/dotfiles"
 chmod +x dotfile_installer.sh
 bash dotfile_installer.sh
-echo "${OK} Dotfiles Installation Completed${RESET}"
 
 # ===========================
 # Ask for Reboot
