@@ -13,16 +13,16 @@ zsh_pkg2=(
   fzf
 )
 
-USER_NAME=$(whoami)
 # Get the current username
 USER_NAME=$(whoami)
 
-# Temporary sudoers line SUDO_LINE="$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/chsh # TEMP-CHSH-ALLOW"
+# Temporary sudoers line
+SUDO_LINE="$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/chsh # TEMP-CHSH-ALLOW"
 
 # Function to clean up sudoers on exit
 cleanup_sudoers() {
   echo "Cleaning up temporary sudoers entry..."
-  sudo sed -i "\|$SUDO_LINE|d" /etc/sudoers
+  sudo sed -i '/# TEMP-CHSH-ALLOW/d' /etc/sudoers
 }
 trap cleanup_sudoers EXIT
 
