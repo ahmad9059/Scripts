@@ -36,4 +36,35 @@ sudo pacman -Syu --noconfirm
 echo "${NOTE} Installing wallust and quickshell...${RESET}"
 sudo pacman -S --noconfirm wallust quickshell
 
-echo "${OK} Installation complete!${RESET}"
+echo "${NOTE} Installing yay (AUR helper)...${RESET}"
+
+# Check if yay is already installed
+if ! command -v yay &>/dev/null; then
+  sudo pacman -S --needed --noconfirm base-devel git
+
+  while ! command -v yay &>/dev/null; do
+    echo "${NOTE} Attempting to build and install yay...${RESET}"
+
+    rm -rf /tmp/yay
+    git clone https://aur.archlinux.org/yay.git /tmp/yay || {
+      echo "${ERROR} Failed to clone yay repo, retrying in 5s...${RESET}"
+      sleep 5
+      continue
+    }
+
+    cd /tmp/yay
+    if makepkg -si --noconfirm; then
+      echo "${OK} yay installed successfully!${RESET}"
+    else
+      echo "${ERROR} Failed to build yay, retrying in 5s...${RESET}"
+      sleep 5
+    fi
+    cd -
+  done
+
+  rm -rf /tmp/yay
+else
+  echo "${NOTE} yay is already installed, skipping.${RESET}"
+fi
+
+echo "${OK} Initial Installation complete!${RESET}"
