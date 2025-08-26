@@ -40,7 +40,7 @@ echo "${NOTE} Installing yay (AUR helper)...${RESET}"
 
 # Check if yay is already installed
 if ! command -v yay &>/dev/null; then
-  sudo pacman -S --needed --noconfirm base-devel git
+  sudo pacman -S --needed --noconfirm go base-devel git
 
   while ! command -v yay &>/dev/null; do
     echo "${NOTE} Attempting to build and install yay...${RESET}"
