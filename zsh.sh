@@ -13,24 +13,24 @@ zsh_pkg2=(
   fzf
 )
 
-# Get the current username
-USER_NAME=$(whoami)
-
-# Temporary sudoers line
-SUDO_LINE="$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/chsh # TEMP-CHSH-ALLOW"
-
-# Function to clean up sudoers on exit
-cleanup_sudoers() {
-  echo "Cleaning up temporary sudoers entry..."
-  sudo sed -i '/# TEMP-CHSH-ALLOW/d' /etc/sudoers
-}
-trap cleanup_sudoers EXIT
-
-# Add temporary sudoers entry if not already present
-if ! sudo grep -qF "$SUDO_LINE" /etc/sudoers; then
-  echo "Adding temporary sudoers entry for $USER_NAME..."
-  echo "$SUDO_LINE" | sudo tee -a /etc/sudoers >/dev/null
-fi
+# # Get the current username
+# USER_NAME=$(whoami)
+#
+# # Temporary sudoers line
+# SUDO_LINE="$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/chsh # TEMP-CHSH-ALLOW"
+#
+# # Function to clean up sudoers on exit
+# cleanup_sudoers() {
+#   echo "Cleaning up temporary sudoers entry..."
+#   sudo sed -i '/# TEMP-CHSH-ALLOW/d' /etc/sudoers
+# }
+# trap cleanup_sudoers EXIT
+#
+# # Add temporary sudoers entry if not already present
+# if ! sudo grep -qF "$SUDO_LINE" /etc/sudoers; then
+#   echo "Adding temporary sudoers entry for $USER_NAME..."
+#   echo "$SUDO_LINE" | sudo tee -a /etc/sudoers >/dev/null
+# fi
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
